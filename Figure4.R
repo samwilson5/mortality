@@ -7,19 +7,12 @@ CED = function(vect1,vect2) {
   #return(sum((vect2 - vect1)))
   else{return(0)}
 }
-#CED = function(vect1,vect2) {
-#    sqrt(sum((vect2 - vect1)^2))}
-  #return(sum((vect2 - vect1)))
-  
-#################################
-# everything needs to be redone with the file path used in CO_data below!!!
-## not the files above, then redo calculations for past,present, future
 
 CO_data = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/CO_01_drydaysTemp.csv")
 num = CO_data %>% aggregate(n ~ Year,FUN=median)
 temp = CO_data %>% aggregate(avgtemp ~ Year,FUN=median)
 CO_current = left_join(num,temp,join_by(Year==Year))
-#CO_current = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/CO_01_drydaysTemp.csv")
+
 # calculate z-score for all temperatures
 CO_current$ztemp = (CO_current$avgtemp - mean(CO_current$avgtemp))/sd(CO_current$avgtemp)
 # calculate z-score for all n
@@ -28,7 +21,6 @@ median_values = c(median(CO_current$ztemp),median(CO_current$zn))
 CO_current$dist = 0
 for (i in 1:43){
   CO_current[i,6] = CED(median_values,c(CO_current[i,4],CO_current[i,5]))
-  #CO_current[i,8] = CED(median_values,c(CO_current[i,6],CO_current[i,7]))
 }
 
 
@@ -37,13 +29,12 @@ NV1_data = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/NV_01_drydaysTem
 num = NV1_data %>% aggregate(n ~ Year,FUN=median)
 temp = NV1_data %>% aggregate(avgtemp ~ Year,FUN=median)
 NV1_current = left_join(num,temp,join_by(Year==Year))
-#NV1_current = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/NV_01_drydaysTemp.csv")
+
 NV1_current$ztemp = (NV1_current$avgtemp - mean(NV1_current$avgtemp))/sd(NV1_current$avgtemp)
 NV1_current$zn = (NV1_current$n - mean(NV1_current$n))/sd(NV1_current$n)
 median_values = c(median(NV1_current$ztemp),median(NV1_current$zn))
 NV1_current$dist = 0
 for (i in 1:43){
-  #NV1_current[i,8] = CED(median_values,c(NV1_current[i,6],NV1_current[i,7]))
   NV1_current[i,6] = CED(median_values,c(NV1_current[i,4],NV1_current[i,5]))
 }
 
@@ -52,13 +43,11 @@ NV2_data = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/NV_02_drydaysTem
 num = NV2_data %>% aggregate(n ~ Year,FUN=median)
 temp = NV2_data %>% aggregate(avgtemp ~ Year,FUN=median)
 NV2_current = left_join(num,temp,join_by(Year==Year))
-#NV2_current = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/NV_02_drydaysTemp.csv")
 NV2_current$ztemp = (NV2_current$avgtemp - mean(NV2_current$avgtemp))/sd(NV2_current$avgtemp)
 NV2_current$zn = (NV2_current$n - mean(NV2_current$n))/sd(NV2_current$n)
 median_values = c(median(NV2_current$ztemp),median(NV2_current$zn))
 NV2_current$dist = 0
 for (i in 1:43){
-  #NV2_current[i,8] = CED(median_values,c(NV2_current[i,6],NV2_current[i,7]))
   NV2_current[i,6] = CED(median_values,c(NV2_current[i,4],NV2_current[i,5]))
 }
 
@@ -67,13 +56,11 @@ UT_data = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/UT_01_drydaysTemp
 num = UT_data %>% aggregate(n ~ Year,FUN=median)
 temp = UT_data %>% aggregate(avgtemp ~ Year,FUN=median)
 UT_current = left_join(num,temp,join_by(Year==Year))
-#UT_current = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/UT_01_drydaysTemp.csv")
 UT_current$ztemp = (UT_current$avgtemp - mean(UT_current$avgtemp))/sd(UT_current$avgtemp)
 UT_current$zn = (UT_current$n - mean(UT_current$n))/sd(UT_current$n)
 median_values = c(median(UT_current$ztemp),median(UT_current$zn))
 UT_current$dist = 0
 for (i in 1:43){
-  #UT_current[i,8] = CED(median_values,c(UT_current[i,6],UT_current[i,7]))
   UT_current[i,6] = CED(median_values,c(UT_current[i,4],UT_current[i,5]))
 }
 
@@ -82,13 +69,11 @@ WY_data = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/UGRB_drydaysTemp.
 num = WY_data %>% aggregate(n ~ Year,FUN=median)
 temp = WY_data %>% aggregate(avgtemp ~ Year,FUN=median)
 WY_current = left_join(num,temp,join_by(Year==Year))
-#WY_current = read.csv("E:/SoilWat/dryness/dry_output/nonSimulated/UGRB_drydaysTemp.csv")
 WY_current$ztemp = (WY_current$avgtemp - mean(WY_current$avgtemp))/sd(WY_current$avgtemp)
 WY_current$zn = (WY_current$n - mean(WY_current$n))/sd(WY_current$n)
 median_values = c(median(WY_current$ztemp),median(WY_current$zn))
 WY_current$dist = 0
 for (i in 1:43){
-  #WY_current[i,8] = CED(median_values,c(WY_current[i,6],WY_current[i,7]))
   WY_current[i,6] = CED(median_values,c(WY_current[i,4],WY_current[i,5]))
 }
 
@@ -245,4 +230,5 @@ library(ggpubr)
 figure <- ggarrange(p2,p1,p3,p4,p5,
                     ncol = 2, nrow = 3)
 # export with hor - 850, vert - 1100
+
 
